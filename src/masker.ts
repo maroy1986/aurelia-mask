@@ -1,5 +1,5 @@
 ﻿export function getMasker(options: IMaskOptions): Masker {
-    let maskers : Map<any, Masker> = _maskers;
+    let maskers: Map<any, Masker> = _maskers;
     let key = new MaskOptions();
     key.maskFormat = options.maskFormat;
     key.placeholder = options.placeholder || "_";
@@ -36,7 +36,7 @@ var maskDefinitions = {
 };
 
 function deleteChars(s: string, ch: string): string {
-    if(s == null) {
+    if (s == null) {
         s = "";
     }
     return s.split(ch).join("");
@@ -69,20 +69,20 @@ export class Masker {
     }
 
     unmaskValue(value: string): string {
-        if(this.aspnetMasking) {
+        if (this.aspnetMasking) {
             let result = this._maskValue2(value);
             return result;
-        }else if(this.bindMasking) {
+        } else if (this.bindMasking) {
             return this._maskValue(value, true);
         }
         return this._unmaskValue(value);
     }
 
     maskValue(unmaskedValue: string): string {
-        if(this.aspnetMasking) {
+        if (this.aspnetMasking) {
             let result = this._maskValue2(unmaskedValue);
             return result;
-        //}else if(isNumeric(unmaskedValue)) {
+            //}else if(isNumeric(unmaskedValue)) {
             //unmaskedValue = ""+unmaskedValue;
         }
         return this._maskValue(unmaskedValue, false);
@@ -91,28 +91,27 @@ export class Masker {
     maxCaretPos(value: string): number {
         let valueLength = -1;
         //if(isString(value)) {
-            valueLength = value.length;
+        valueLength = value.length;
         //}else if(isNumeric(value)) {
-            //valueLength = (""+value).length;
+        //valueLength = (""+value).length;
         //}
-        if(this.aspnetMasking) {
+        if (this.aspnetMasking) {
             let caretPosMax = this.maskCaretMap.slice().pop();
             return caretPosMax;
-        }else if(this.bindMasking) {
-            if(this.maskCaretMap.indexOf(valueLength) != -1 || 
+        } else if (this.bindMasking) {
+            if (this.maskCaretMap.indexOf(valueLength) != -1 ||
                 valueLength === this.maskFormat.length) {
                 return valueLength;
-            }else {
-                for(var i = 0; i < this.maskCaretMap.length; i++) {
-                    if(this.maskCaretMap[i] > valueLength) 
-                    {
+            } else {
+                for (var i = 0; i < this.maskCaretMap.length; i++) {
+                    if (this.maskCaretMap[i] > valueLength) {
                         return this.maskCaretMap[i];
                     }
                 }
                 return this.maskCaretMap.slice().shift();
 
             }
-        }else{
+        } else {
             let caretPosMax = this.maskCaretMap[valueLength] || this.maskCaretMap.slice().shift();
             return caretPosMax;
         }
@@ -151,7 +150,7 @@ export class Masker {
         }
 
         function putMaybe(chr) {
-            if(!keepMasking || input.length > 0) {
+            if (!keepMasking || input.length > 0) {
                 valueMasked += chr;
             }
         }
@@ -178,21 +177,21 @@ export class Masker {
 
         this.maskPlaceholder.split('').forEach(function (chr, i) {
             if (input.length > 0 && i === maskCaretMapCopy[0]) {
-                if(maskPatternsCopy.length) {
-                    while(input.length > 0 && !nextCharMatches()) {
+                if (maskPatternsCopy.length) {
+                    while (input.length > 0 && !nextCharMatches()) {
                         advanceInput();
                     }
                 }
-                if(maskPatternsCopy.length && nextCharMatches()) {
+                if (maskPatternsCopy.length && nextCharMatches()) {
                     putNextInput();
                     advanceCaretMap();
                     advancePatterns();
-                }else{
+                } else {
                     putMaybe(chr);
                     maskCaretMapCopy.shift();
                 }
                 advanceInput();
-            }else{
+            } else {
                 if (input.length > 0 && input.charAt(0) === chr) {
                     advanceInput();
                 }
@@ -203,11 +202,11 @@ export class Masker {
     }
 
     _maskValue2(unmaskedValue: string) {
-        let input : string;
+        let input: string;
         //if(isNumeric(unmaskedValue)) {
-            //input = ""+unmaskedValue;
+        //input = ""+unmaskedValue;
         //}else{
-            input = unmaskedValue || "";
+        input = unmaskedValue || "";
         //}
         var valueMasked = '',
             maskCaretMapCopy = this.maskCaretMap.slice(),
@@ -224,7 +223,7 @@ export class Masker {
         }
 
         function nextCharMatches() {
-            if(input.charAt(0) == placeholder) return true;
+            if (input.charAt(0) == placeholder) return true;
             return maskPatternsCopy[0].test(input.charAt(0));
         }
 
@@ -242,17 +241,17 @@ export class Masker {
 
         this.maskPlaceholder.split('').forEach(function (chr, i) {
             if (input.length > 0 && i === maskCaretMapCopy[0]) {
-                if(maskPatternsCopy.length && nextCharMatches()) {
+                if (maskPatternsCopy.length && nextCharMatches()) {
                     putNextInput();
                     advanceCaretMap();
                     advancePatterns();
-                }else{
+                } else {
                     putMaybe(chr);
                     maskCaretMapCopy.shift();
                 }
                 advanceInput();
-            }else{
-                while(input.length > 0 && input.charAt(0) === placeholder) {
+            } else {
+                while (input.length > 0 && input.charAt(0) === placeholder) {
                     advanceInput();
                 }
                 if (input.length > 0 && input.charAt(0) === chr) {
@@ -269,22 +268,22 @@ export class Masker {
     }
 
     getNextCaretPos(caretPos: number): number {
-        if(this.maskCaretMap.length == 0) {
+        if (this.maskCaretMap.length == 0) {
             return this.maskFormat.length;
         }
         let ix = 0;
-        while(ix < this.maskCaretMap.length-1 && this.maskCaretMap[ix] <= caretPos) {
+        while (ix < this.maskCaretMap.length - 1 && this.maskCaretMap[ix] <= caretPos) {
             ix++;
         }
         return this.maskCaretMap[ix];
     }
 
     getPreviousCaretPos(caretPos: number): number {
-        if(this.maskCaretMap.length == 0) {
+        if (this.maskCaretMap.length == 0) {
             return 0;
         }
-        let ix = this.maskCaretMap.length-1;
-        while(ix > 0 && this.maskCaretMap[ix] >= caretPos) {
+        let ix = this.maskCaretMap.length - 1;
+        while (ix > 0 && this.maskCaretMap[ix] >= caretPos) {
             ix--;
         }
         return this.maskCaretMap[ix];
@@ -358,7 +357,7 @@ export class Masker {
 
     isValidAt(chr: string, caretPos: number): boolean {
         let ix = this.maskCaretMap.indexOf(caretPos);
-        if(ix == -1 || ix >= this.maskPatterns.length) return false;
+        if (ix == -1 || ix >= this.maskPatterns.length) return false;
         let pattern = this.maskPatterns[ix];
         return pattern.test(chr);
     }
@@ -371,5 +370,5 @@ export function isString(myVar: any) {
 
 // from http://stackoverflow.com/a/9716488/23648
 export function isNumeric(n) {
-  return !isString(n) && !isNaN(parseFloat(n)) && isFinite(n);
+    return !isString(n) && !isNaN(parseFloat(n)) && isFinite(n);
 }
