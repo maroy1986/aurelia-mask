@@ -1,3 +1,4 @@
+"use strict";
 function getMasker(options) {
     var maskers = _maskers;
     var key = new MaskOptions();
@@ -16,7 +17,7 @@ var MaskOptions = (function () {
     function MaskOptions() {
     }
     return MaskOptions;
-})();
+}());
 exports.MaskOptions = MaskOptions;
 var _maskers = new Map();
 var maskDefinitions = {
@@ -283,7 +284,7 @@ var Masker = (function () {
         return pattern.test(chr);
     };
     return Masker;
-})();
+}());
 exports.Masker = Masker;
 function isString(myVar) {
     return (typeof myVar === 'string' || myVar instanceof String);

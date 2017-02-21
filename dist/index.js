@@ -1,3 +1,4 @@
+"use strict";
 function configure(aurelia, config) {
 }
 exports.configure = configure;

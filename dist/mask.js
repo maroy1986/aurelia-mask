@@ -1,3 +1,4 @@
+"use strict";
 var masker_1 = require("./masker");
 var MaskValueConverter = (function () {
     function MaskValueConverter() {
@@ -13,6 +14,6 @@ var MaskValueConverter = (function () {
         return result;
     };
     return MaskValueConverter;
-})();
+}());
 exports.MaskValueConverter = MaskValueConverter;
 //# sourceMappingURL=mask.js.map
