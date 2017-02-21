@@ -1,5 +1,3 @@
-
-
 rm dist/*
 cp src/*.ts dist/
 cp dist_tsconfig.json dist/tsconfig.json

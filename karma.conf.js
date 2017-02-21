@@ -4,7 +4,7 @@
 
 var singleRun = true;
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     basePath: '',
@@ -12,8 +12,8 @@ module.exports = function(config) {
     frameworks: ['jspm', 'jasmine'],
 
     plugins: [
-        'karma-jasmine', 'karma-jspm', 'karma-chrome-launcher',
-        'karma-coverage'
+      'karma-jasmine', 'karma-jspm', 'karma-chrome-launcher',
+      'karma-coverage'
     ],
 
     files: [],
@@ -21,30 +21,30 @@ module.exports = function(config) {
     exclude: [],
 
     jspm: {
-        loadFiles: [
-            'tests/unit/tests/unit/src/isnumeric.spec.js',
-            'tests/unit/tests/unit/src/masker.spec.js',
-            'tests/unit/tests/unit/src/masked-input.spec.js'
-        ],
-        serveFiles: [
-            '**/*.js',
-        ],
-        defaultJSExtensions: true
+      loadFiles: [
+        'tests/unit/tests/unit/src/isnumeric.spec.js',
+        'tests/unit/tests/unit/src/masker.spec.js',
+        'tests/unit/tests/unit/src/masked-input.spec.js'
+      ],
+      serveFiles: [
+        '**/*.js',
+      ],
+      defaultJSExtensions: true
     },
 
     proxies: {
-        '/jspm_packages': '/base/jspm_packages',
-        '/src': '/base/dist',
-        '/typings': '/base/typings',
-        '/tests': '/base/tests'
+      '/jspm_packages': '/base/jspm_packages',
+      '/src': '/base/dist',
+      '/typings': '/base/typings',
+      '/tests': '/base/tests'
     },
 
     reporters: ['progress'/*, 'coverage'*/],
 
     coverageReporter: {
-        type: 'html',
-        dir: 'coverage',
-        includeAllSources : true
+      type: 'html',
+      dir: 'coverage',
+      includeAllSources: true
     },
 
     port: 9876,
